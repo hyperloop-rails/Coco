@@ -1,0 +1,6281 @@
+[
+  {
+    "table": "accounts",
+    "parent": "ApplicationRecord",
+    "class": "Account",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "username",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "public_key",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "note",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "display_name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uri",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "locked",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "header_remote_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "inbox_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "outbox_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "shared_inbox_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "followers_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "protocol",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "memorial",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "moved_to_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "username",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_aliases",
+    "parent": "ApplicationRecord",
+    "class": "AccountAlias",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "acct",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uri",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uri",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "uri",
+          "account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_conversations",
+    "parent": "ApplicationRecord",
+    "class": "AccountConversation",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "participant_account_ids",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_ids",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "lock_version",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "unread",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "conversation_id",
+          "participant_account_ids"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "conversation",
+        "ctype": "DB",
+        "class_name": "Conversation",
+        "fk_column_name": "conversation_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "conversation_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Conversation",
+        "fk_column_name": "conversation",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "last_status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "last_status",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_deletion_requests",
+    "parent": "ApplicationRecord",
+    "class": "AccountDeletionRequest",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_domain_blocks",
+    "parent": "ApplicationRecord",
+    "class": "AccountDomainBlock",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_migrations",
+    "parent": "ApplicationRecord",
+    "class": "AccountMigration",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "acct",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "followers_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_moderation_notes",
+    "parent": "ApplicationRecord",
+    "class": "AccountModerationNote",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "content",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "content",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "content",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_notes",
+    "parent": "ApplicationRecord",
+    "class": "AccountNote",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_pins",
+    "parent": "ApplicationRecord",
+    "class": "AccountPin",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_stats",
+    "parent": "ApplicationRecord",
+    "class": "AccountStat",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "statuses_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "following_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "followers_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_statuses_cleanup_policies",
+    "parent": "ApplicationRecord",
+    "class": "AccountStatusesCleanupPolicy",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "enabled",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "min_status_age",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_direct",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_pinned",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_polls",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_media",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_self_fav",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "keep_self_bookmark",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "min_status_age",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "InclusionConstraint",
+        "field_name": "min_status_age",
+        "ctype": "DATA_VALIDATION",
+        "values": [
+
+        ],
+        "type": "builtin"
+      },
+      {
+        "^o": "NumericalConstraint",
+        "field_name": "min_favs",
+        "ctype": "DATA_VALIDATION",
+        "min": 1,
+        "max": null
+      },
+      {
+        "^o": "NumericalConstraint",
+        "field_name": "min_reblogs",
+        "ctype": "DATA_VALIDATION",
+        "min": 1,
+        "max": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_summaries",
+    "parent": "ApplicationRecord",
+    "class": "AccountSummary",
+    "constraints": [
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_warnings",
+    "parent": "ApplicationRecord",
+    "class": "AccountWarning",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "action",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "report",
+        "ctype": "DB",
+        "class_name": "Report",
+        "fk_column_name": "report_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "report_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Report",
+        "fk_column_name": "report",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "account_warning_presets",
+    "parent": "ApplicationRecord",
+    "class": "AccountWarningPreset",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "title",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "admin/action_logs",
+    "parent": "ApplicationRecord",
+    "class": "Admin::ActionLog",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Target",
+        "fk_column_name": "target",
+        "polymorphic": true
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "announcements",
+    "parent": "ApplicationRecord",
+    "class": "Announcement",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "published",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "all_day",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "announcement_mutes",
+    "parent": "ApplicationRecord",
+    "class": "AnnouncementMute",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "announcement_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "announcement",
+        "ctype": "DB",
+        "class_name": "Announcement",
+        "fk_column_name": "announcement_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "announcement_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Announcement",
+        "fk_column_name": "announcement",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "announcement_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "announcement_reactions",
+    "parent": "ApplicationRecord",
+    "class": "AnnouncementReaction",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "announcement_id",
+          "name"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "announcement",
+        "ctype": "DB",
+        "class_name": "Announcement",
+        "fk_column_name": "announcement_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "custom_emoji",
+        "ctype": "DB",
+        "class_name": "CustomEmoji",
+        "fk_column_name": "custom_emoji_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "announcement_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Announcement",
+        "fk_column_name": "announcement",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "custom_emoji_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Custom_emoji",
+        "fk_column_name": "custom_emoji",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "appeals",
+    "parent": "ApplicationRecord",
+    "class": "Appeal",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_warning_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_warning_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_warning",
+        "ctype": "DB",
+        "class_name": "AccountWarning",
+        "fk_column_name": "account_warning_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "approved_by_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "rejected_by_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_warning_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "AccountWarning",
+        "fk_column_name": "strike",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "approved_by_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "approved_by_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "rejected_by_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "rejected_by_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_warning_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_warning_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "backups",
+    "parent": "ApplicationRecord",
+    "class": "Backup",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "processed",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "blocks",
+    "parent": "ApplicationRecord",
+    "class": "Block",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "bookmarks",
+    "parent": "ApplicationRecord",
+    "class": "Bookmark",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "status_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "status_id",
+          "account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "canonical_email_blocks",
+    "parent": "ApplicationRecord",
+    "class": "CanonicalEmailBlock",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "canonical_email_hash",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "reference_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "canonical_email_hash"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "reference_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "reference_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "reference_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "canonical_email_hash",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "canonical_email_hash"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "conversations",
+    "parent": "ApplicationRecord",
+    "class": "Conversation",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "uri"
+        ],
+        "ctype": "DB",
+        "cond": "\"(uri IS NOT NULL)\"",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "conversation_mutes",
+    "parent": "ApplicationRecord",
+    "class": "ConversationMute",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "conversation_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "conversation_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "conversation",
+        "ctype": "DB",
+        "class_name": "Conversation",
+        "fk_column_name": "conversation_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "conversation_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Conversation",
+        "fk_column_name": "conversation",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "custom_emojis",
+    "parent": "ApplicationRecord",
+    "class": "CustomEmoji",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "shortcode",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "disabled",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "visible_in_picker",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "shortcode",
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "category_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "CustomEmojiCategory",
+        "fk_column_name": "category",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "shortcode",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "shortcode",
+          "domain"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "FormatConstraint",
+        "field_name": "shortcode",
+        "ctype": "DATA_VALIDATION",
+        "format": null
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "shortcode",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "shortcode"
+        ],
+        "ctype": "CLASS_RELATIONSHIP",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "has_one"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "custom_emoji_categories",
+    "parent": "ApplicationRecord",
+    "class": "CustomEmojiCategory",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "name"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "name"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "custom_filters",
+    "parent": "ApplicationRecord",
+    "class": "CustomFilter",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "phrase",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "context",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "irreversible",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "whole_word",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "phrase",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "context",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "devices",
+    "parent": "ApplicationRecord",
+    "class": "Device",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "device_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "fingerprint_key",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "identity_key",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "oauth_access_token",
+        "ctype": "DB",
+        "class_name": "OauthAccessToken",
+        "fk_column_name": "access_token_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "access_token_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Doorkeeper::AccessToken",
+        "fk_column_name": "access_token",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "fingerprint_key",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "identity_key",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "domain_allows",
+    "parent": "ApplicationRecord",
+    "class": "DomainAllow",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "domain_blocks",
+    "parent": "ApplicationRecord",
+    "class": "DomainBlock",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "reject_media",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "reject_reports",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "obfuscate",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "email_domain_blocks",
+    "parent": "ApplicationRecord",
+    "class": "EmailDomainBlock",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "email_domain_block",
+        "ctype": "DB",
+        "class_name": "EmailDomainBlock",
+        "fk_column_name": "parent_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "parent_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "EmailDomainBlock",
+        "fk_column_name": "parent",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "encrypted_messages",
+    "parent": "ApplicationRecord",
+    "class": "EncryptedMessage",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "from_device_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "body",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "digest",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "message_franking",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "from_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "device",
+        "ctype": "DB",
+        "class_name": "Device",
+        "fk_column_name": "device_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "device_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Device",
+        "fk_column_name": "device",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "from_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "from_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "favourites",
+    "parent": "ApplicationRecord",
+    "class": "Favourite",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "status_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "status_id",
+          "account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "featured_tags",
+    "parent": "ApplicationRecord",
+    "class": "FeaturedTag",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "tag_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "statuses_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "tag",
+        "ctype": "DB",
+        "class_name": "Tag",
+        "fk_column_name": "tag_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "tag_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Tag",
+        "fk_column_name": "tag",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "follows",
+    "parent": "ApplicationRecord",
+    "class": "Follow",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "show_reblogs",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "notify",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "follow_recommendations",
+    "parent": "ApplicationRecord",
+    "class": "FollowRecommendation",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account_summary",
+        "fk_column_name": "account_summary",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "follow_recommendation_suppressions",
+    "parent": "ApplicationRecord",
+    "class": "FollowRecommendationSuppression",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "follow_requests",
+    "parent": "ApplicationRecord",
+    "class": "FollowRequest",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "show_reblogs",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "notify",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "identities",
+    "parent": "ApplicationRecord",
+    "class": "Identity",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "provider",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uid",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uid",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "uid",
+          "provider"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "provider",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "imports",
+    "parent": "ApplicationRecord",
+    "class": "Import",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "approved",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "overwrite",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "instances",
+    "parent": "ApplicationRecord",
+    "class": "Instance",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "domain",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Domain_block",
+        "fk_column_name": "domain_block",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "domain",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Domain_allow",
+        "fk_column_name": "domain_allow",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "domain",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Unavailable_domain",
+        "fk_column_name": "unavailable_domain",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "invites",
+    "parent": "ApplicationRecord",
+    "class": "Invite",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "user_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "code",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uses",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "autofollow",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "code"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "ip_blocks",
+    "parent": "ApplicationRecord",
+    "class": "IpBlock",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "ip",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "severity",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "severity",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "lists",
+    "parent": "ApplicationRecord",
+    "class": "List",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "title",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "replies_policy",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "title",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "list_accounts",
+    "parent": "ApplicationRecord",
+    "class": "ListAccount",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "list_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "list_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "follow",
+        "ctype": "DB",
+        "class_name": "Follow",
+        "fk_column_name": "follow_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "list",
+        "ctype": "DB",
+        "class_name": "List",
+        "fk_column_name": "list_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "list_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "List",
+        "fk_column_name": "list",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "follow_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Follow",
+        "fk_column_name": "follow",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "list_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "login_activities",
+    "parent": "ApplicationRecord",
+    "class": "LoginActivity",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "user_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "authentication_method",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "InclusionConstraint",
+        "field_name": "authentication_method",
+        "ctype": "DATA_VALIDATION",
+        "values": [
+
+        ],
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "markers",
+    "parent": "ApplicationRecord",
+    "class": "Marker",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "timeline",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "last_read_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "lock_version",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "user_id",
+          "timeline"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "timeline",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "last_read_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "InclusionConstraint",
+        "field_name": "timeline",
+        "ctype": "DATA_VALIDATION",
+        "values": [
+
+        ],
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "media_attachments",
+    "parent": "ApplicationRecord",
+    "class": "MediaAttachment",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "remote_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "shortcode"
+        ],
+        "ctype": "DB",
+        "cond": "\"(shortcode IS NOT NULL)\"",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "scheduled_status",
+        "ctype": "DB",
+        "class_name": "ScheduledStatus",
+        "fk_column_name": "scheduled_status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "scheduled_status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Scheduled_status",
+        "fk_column_name": "scheduled_status",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "description",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "description",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "mentions",
+    "parent": "ApplicationRecord",
+    "class": "Mention",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "silent",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "status_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "mutes",
+    "parent": "ApplicationRecord",
+    "class": "Mute",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "hide_notifications",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "target_account_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "notifications",
+    "parent": "ApplicationRecord",
+    "class": "Notification",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "activity_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "activity_type",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "from_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "from_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "from_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "from_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Activity",
+        "fk_column_name": "activity",
+        "polymorphic": true
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Mention",
+        "fk_column_name": "mention",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Follow",
+        "fk_column_name": "follow",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Follow_request",
+        "fk_column_name": "follow_request",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Favourite",
+        "fk_column_name": "favourite",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "activity_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Poll",
+        "fk_column_name": "poll",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "InclusionConstraint",
+        "field_name": "type",
+        "ctype": "DATA_VALIDATION",
+        "values": [
+
+        ],
+        "type": "builtin"
+      },
+      {
+        "^o": "InclusionConstraint",
+        "field_name": "activity_type",
+        "ctype": "CLASS_RELATIONSHIP",
+        "values": [
+          "Favourite",
+          "Follow",
+          "FollowRequest",
+          "Mention",
+          "Poll",
+          "Status"
+        ],
+        "type": "polymorphic"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "one_time_keys",
+    "parent": "ApplicationRecord",
+    "class": "OneTimeKey",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "signature",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "device",
+        "ctype": "DB",
+        "class_name": "Device",
+        "fk_column_name": "device_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "device_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Device",
+        "fk_column_name": "device",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "signature",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "polls",
+    "parent": "ApplicationRecord",
+    "class": "Poll",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "options",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "cached_tallies",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "multiple",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "hide_totals",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "votes_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "lock_version",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "options",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "status_id"
+        ],
+        "ctype": "CLASS_RELATIONSHIP",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "has_one"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "poll_votes",
+    "parent": "ApplicationRecord",
+    "class": "PollVote",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "choice",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "poll",
+        "ctype": "DB",
+        "class_name": "Poll",
+        "fk_column_name": "poll_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "poll_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Poll",
+        "fk_column_name": "poll",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "choice",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "preview_cards",
+    "parent": "ApplicationRecord",
+    "class": "PreviewCard",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "title",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "description",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "type",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "html",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "author_name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "author_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "provider_name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "provider_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "width",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "height",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "embed_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "url"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "url",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "url"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "preview_card_providers",
+    "parent": "ApplicationRecord",
+    "class": "PreviewCardProvider",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "relays",
+    "parent": "ApplicationRecord",
+    "class": "Relay",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "inbox_url",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "state",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "reports",
+    "parent": "ApplicationRecord",
+    "class": "Report",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_ids",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "target_account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "category",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "action_taken_by_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "assigned_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "target_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "target_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "target_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "action_taken_by_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "action_taken_by_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "assigned_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "assigned_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "comment",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "report_notes",
+    "parent": "ApplicationRecord",
+    "class": "ReportNote",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "content",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "report_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "report",
+        "ctype": "DB",
+        "class_name": "Report",
+        "fk_column_name": "report_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "report_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Report",
+        "fk_column_name": "report",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "content",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "content",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "rules",
+    "parent": "ApplicationRecord",
+    "class": "Rule",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "priority",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "scheduled_statuses",
+    "parent": "ApplicationRecord",
+    "class": "ScheduledStatus",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "session_activations",
+    "parent": "ApplicationRecord",
+    "class": "SessionActivation",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "session_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "user_agent",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "user_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "session_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "oauth_access_token",
+        "ctype": "DB",
+        "class_name": "OauthAccessToken",
+        "fk_column_name": "access_token_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "access_token_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Doorkeeper::AccessToken",
+        "fk_column_name": "access_token",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "web_push_subscription_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Web::PushSubscription",
+        "fk_column_name": "web_push_subscription",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "web_push_subscription_id"
+        ],
+        "ctype": "CLASS_RELATIONSHIP",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "has_one"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "site_uploads",
+    "parent": "ApplicationRecord",
+    "class": "SiteUpload",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "var",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "var"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "var",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "var"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "statuses",
+    "parent": "ApplicationRecord",
+    "class": "Status",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "sensitive",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "visibility",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "spoiler_text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "reply",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "uri"
+        ],
+        "ctype": "DB",
+        "cond": "\"(uri IS NOT NULL)\"",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "in_reply_to_account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "in_reply_to_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "reblog_of_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "application_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Doorkeeper::Application",
+        "fk_column_name": "application",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "in_reply_to_account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "in_reply_to_account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "conversation_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Conversation",
+        "fk_column_name": "conversation",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "poll_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Poll",
+        "fk_column_name": "preloadable_poll",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "in_reply_to_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "thread",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "reblog_of_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "reblog",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "status_edits",
+    "parent": "ApplicationRecord",
+    "class": "StatusEdit",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "spoiler_text",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "status_pins",
+    "parent": "ApplicationRecord",
+    "class": "StatusPin",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "account_id",
+          "status_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "status_stats",
+    "parent": "ApplicationRecord",
+    "class": "StatusStat",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "status_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "replies_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "reblogs_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "favourites_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "status_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status",
+        "ctype": "DB",
+        "class_name": "Status",
+        "fk_column_name": "status_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "status_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Status",
+        "fk_column_name": "status",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "status_id"
+        ],
+        "ctype": "CLASS_RELATIONSHIP",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "has_one"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "system_keys",
+    "parent": "ApplicationRecord",
+    "class": "SystemKey",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "tags",
+    "parent": "ApplicationRecord",
+    "class": "Tag",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "name",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "FormatConstraint",
+        "field_name": "name",
+        "ctype": "DATA_VALIDATION",
+        "format": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "tombstones",
+    "parent": "ApplicationRecord",
+    "class": "Tombstone",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "uri",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "unavailable_domains",
+    "parent": "ApplicationRecord",
+    "class": "UnavailableDomain",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "domain",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "domain"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "users",
+    "parent": "ApplicationRecord",
+    "class": "User",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "email",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "encrypted_password",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "sign_in_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "admin",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "otp_required_for_login",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "filtered_languages",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "account_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "disabled",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "moderator",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "approved",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "confirmation_token"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "email"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "reset_password_token"
+        ],
+        "ctype": "DB",
+        "cond": "\"(reset_password_token IS NOT NULL)\"",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account",
+        "ctype": "DB",
+        "class_name": "Account",
+        "fk_column_name": "account_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "invite",
+        "ctype": "DB",
+        "class_name": "Invite",
+        "fk_column_name": "invite_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "oauth_application",
+        "ctype": "DB",
+        "class_name": "OauthApplication",
+        "fk_column_name": "created_by_application_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "account_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Account",
+        "fk_column_name": "account",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "invite_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Invite",
+        "fk_column_name": "invite",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "created_by_application_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Doorkeeper::Application",
+        "fk_column_name": "created_by_application",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "user_invite_requests",
+    "parent": "ApplicationRecord",
+    "class": "UserInviteRequest",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "LengthConstraint",
+        "field_name": "text",
+        "ctype": "DATA_VALIDATION",
+        "min": -1,
+        "max": -1
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "user_id"
+        ],
+        "ctype": "CLASS_RELATIONSHIP",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "has_one"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "user_ips",
+    "parent": "ApplicationRecord",
+    "class": "UserIp",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "web/push_subscriptions",
+    "parent": "ApplicationRecord",
+    "class": "Web::PushSubscription",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "access_token_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "Doorkeeper::AccessToken",
+        "fk_column_name": "access_token",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "endpoint",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key_p256dh",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "key_auth",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "web/settings",
+    "parent": "ApplicationRecord",
+    "class": "Web::Setting",
+    "constraints": [
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user_id",
+        "ctype": "CLASS_RELATIONSHIP",
+        "class_name": "User",
+        "fk_column_name": "user",
+        "polymorphic": null
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "user",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "user"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "webauthn_credentials",
+    "parent": "ApplicationRecord",
+    "class": "WebauthnCredential",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "external_id",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "public_key",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "nickname",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "sign_count",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "created_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "updated_at",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "external_id"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "ForeignKeyConstraint",
+        "field_name": "user",
+        "ctype": "DB",
+        "class_name": "User",
+        "fk_column_name": "user_id",
+        "polymorphic": false
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "external_id",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "public_key",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "nickname",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "sign_count",
+        "ctype": "DATA_VALIDATION",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "external_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "nickname",
+          "user_id"
+        ],
+        "ctype": "DATA_VALIDATION",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "builtin"
+      },
+      {
+        "^o": "NumericalConstraint",
+        "field_name": "sign_count",
+        "ctype": "DATA_VALIDATION",
+        "min": 0,
+        "max": 2
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  },
+  {
+    "table": "settings",
+    "parent": "RailsSettings::Base",
+    "class": "Setting",
+    "constraints": [
+      {
+        "^o": "PresenceConstraint",
+        "field_name": "var",
+        "ctype": "DB",
+        "cond": ""
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "thing_type",
+          "thing_id",
+          "var"
+        ],
+        "ctype": "DB",
+        "cond": "",
+        "case_sensitive": true,
+        "type": "db-index"
+      },
+      {
+        "^o": "UniqueConstraint",
+        "field_name": [
+          "id"
+        ],
+        "ctype": "PK",
+        "cond": "",
+        "case_sensitive": false,
+        "type": "pk"
+      }
+    ]
+  }
+]
